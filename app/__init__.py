@@ -1,29 +1,22 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_cors import CORS
-from app.config import Config
 
-db = SQLAlchemy()
-migrate = Migrate()
 
-def create_app(config_class=Config):
+def create_app():
     app = Flask(__name__)
-    app.config.from_object(config_class)
-    
-    # Initialize extensions
-    db.init_app(app)
-    migrate.init_app(app, db)
-    
-    # Enable CORS for React frontend
+
+    # Configuración básica
+    app.config['SECRET_KEY'] = 'your-secret-key'
+
+    # Habilitar CORS (para que funcione con el frontend en http://localhost:3000)
     CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
-    
-    # Register blueprints
-    from app.api.routes import api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
-    
+
+    # Registrar blueprints
+    from app.api.routes import judicial_bp
+    app.register_blueprint(judicial_bp, url_prefix='/api/judicial')
+
     @app.route('/health')
     def health_check():
         return {"status": "healthy"}
-    
+
     return app

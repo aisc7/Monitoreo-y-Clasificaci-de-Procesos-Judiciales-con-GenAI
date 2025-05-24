@@ -3,7 +3,7 @@ from app.services.judicial_api_service import JudicialAPIService
 
 # Crear el Blueprint
 judicial_bp = Blueprint('judicial', __name__)
-service = JudicialAPIService()  # Instancia del servicio
+service = JudicialAPIService()  # Instancia del servicio JudicialAPIService
 
 @judicial_bp.route('/consulta_nombre', methods=['GET'])
 def consulta_por_nombre():

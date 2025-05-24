@@ -17,3 +17,6 @@ class Config:
     # AI service configuration
     AI_API_KEY = os.environ.get('AI_API_KEY')
     AI_MODEL = os.environ.get('AI_MODEL') or 'gpt-4'
+    JUDICIAL_API_URL = os.environ.get('JUDICIAL_API_URL', 'https://api.ramajudicial.gov.co/consulta')
+    JUDICIAL_API_KEY = os.environ.get('JUDICIAL_API_KEY', '')
+    JUDICIAL_API_TIMEOUT = int(os.environ.get('JUDICIAL_API_TIMEOUT', '30'))
